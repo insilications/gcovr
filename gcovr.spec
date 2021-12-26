@@ -5,12 +5,18 @@
 %define keepstatic 1
 Name     : gcovr
 Version  : 5.0
-Release  : 25
+Release  : 26
 URL      : file:///aot/build/clearlinux/packages/gcovr/gcovr-v5.0.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/gcovr/gcovr-v5.0.tar.gz
-Summary  : Generate C/C++ code coverage reports with gcov
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
+Requires: gcovr-bin = %{version}-%{release}
+Requires: gcovr-python = %{version}-%{release}
+Requires: gcovr-python3 = %{version}-%{release}
+Requires: pypi(jinja2)
+Requires: pypi(lxml)
+Requires: pypi(pygments)
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-distutils3
 BuildRequires : pypi(jinja2)
@@ -27,6 +33,32 @@ gcovr
 generate GCC code coverage reports
 website_ • documentation_ • bugtracker_ • `GitHub <repo_>`_
 
+%package bin
+Summary: bin components for the gcovr package.
+Group: Binaries
+
+%description bin
+bin components for the gcovr package.
+
+
+%package python
+Summary: python components for the gcovr package.
+Group: Default
+Requires: gcovr-python3 = %{version}-%{release}
+
+%description python
+python components for the gcovr package.
+
+
+%package python3
+Summary: python3 components for the gcovr package.
+Group: Default
+Requires: python3-core
+
+%description python3
+python3 components for the gcovr package.
+
+
 %prep
 %setup -q -n gcovr
 cd %{_builddir}/gcovr
@@ -37,7 +69,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1640507335
+export SOURCE_DATE_EPOCH=1640507425
 export GCC_IGNORE_WERROR=1
 ## altflags1 content
 ## altflags1
@@ -138,3 +170,14 @@ echo ----[ mark ]----
 
 %files
 %defattr(-,root,root,-)
+
+%files bin
+%defattr(-,root,root,-)
+/usr/bin/gcovr
+
+%files python
+%defattr(-,root,root,-)
+
+%files python3
+%defattr(-,root,root,-)
+/usr/lib/python3*/*
