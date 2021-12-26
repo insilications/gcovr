@@ -1,0 +1,8 @@
+# This file contains additional build requirements that did not get
+# picked up automatically. One name per line, no whitespace.
+buildreq-cmake
+buildreq-distutils3
+pypi(jinja2)
+pypi(lxml)
+pypi(pygments)
+pypi(setuptools)
